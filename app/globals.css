@@ -1,6 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+  font-family: 'Pokemon Pixel Font Regular';
+  src: url("/fonts/pokemon_pixel_font.ttf") format("truetype");
+}
  
 @layer base {
   :root {
@@ -71,6 +76,6 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
+
   }
 }
