@@ -1,4 +1,17 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {}
 
-module.exports = nextConfig
+const nextConfig = {
+  images: {
+    remotePatterns: [
+      {
+        hostname: "raw.githubusercontent.com",
+        pathname: "/PokeAPI/sprites/master/sprites/pokemon/**",
+        protocol: "https",
+      },
+    ],
+  },
+};
+
+module.exports = nextConfig;
+
+module.exports = nextConfig;

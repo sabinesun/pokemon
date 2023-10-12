@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useState } from "react";
+import Link from "next/link";
 
 export default function Home() {
   const [isHoveringMarket, setIsHoveringMarket] = useState(false);
@@ -14,22 +15,24 @@ export default function Home() {
     market ? setIsHoveringMarket(false) : setIsHoveringPC(false);
   };
   return (
-    <main className="flex h-screen w-screen	justify-center overflow-hidden bg-[url('/images/grass.png')] align-middle font-pokemon-classic">
+    <main className="flex h-screen w-screen justify-center bg-[url('/images/grass.png')] align-middle font-pokemon-classic">
       <div className="flex w-full flex-wrap content-center justify-center">
         <div className="space-y-8">
           <div className="flex justify-center text-8xl">WELCOME</div>
           <div className="flex flex-row gap-10">
-            <Image
-              src={"/images/Pokemart_Exterior.png"}
-              alt={"Pokemart"}
-              width={150}
-              height={150}
-              className={`hover:scale-110 ${
-                isHoveringMarket ? "scale-110" : "scale-100"
-              }`}
-              onMouseEnter={() => handleMouseEnter(true)}
-              onMouseLeave={() => handleMouseLeave(true)}
-            ></Image>
+            <Link href="/pokedex">
+              <Image
+                src={"/images/Pokemart_Exterior.png"}
+                alt={"Pokemart"}
+                width={150}
+                height={150}
+                className={`hover:scale-110 ${
+                  isHoveringMarket ? "scale-110" : "scale-100"
+                }`}
+                onMouseEnter={() => handleMouseEnter(true)}
+                onMouseLeave={() => handleMouseLeave(true)}
+              ></Image>
+            </Link>
             <Image
               src={"/images/Pokemon_Center_Exterior.png"}
               alt={"Pokemart"}
@@ -45,7 +48,7 @@ export default function Home() {
 
           <div className="flex justify-center rounded border-8 border-double border-black bg-white text-4xl	">
             <ul>
-              <li> What do you want to do ? </li>
+              <li> What do you want to do ?</li>
               <li
                 className="group flex flex-wrap items-baseline text-2xl "
                 onMouseEnter={() => handleMouseEnter(true)}
