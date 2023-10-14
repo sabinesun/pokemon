@@ -1,8 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
 import Link from "next/link";
+import { useState } from "react";
 
 export default function Home() {
   const [isHoveringMarket, setIsHoveringMarket] = useState(false);
@@ -11,9 +11,11 @@ export default function Home() {
   const handleMouseEnter = (market: boolean) => {
     market ? setIsHoveringMarket(true) : setIsHoveringPC(true);
   };
+
   const handleMouseLeave = (market: boolean) => {
     market ? setIsHoveringMarket(false) : setIsHoveringPC(false);
   };
+
   return (
     <main className="flex h-screen w-screen justify-center bg-[url('/images/grass.png')] align-middle font-pokemon-classic">
       <div className="flex w-full flex-wrap content-center justify-center">
@@ -22,28 +24,28 @@ export default function Home() {
           <div className="flex flex-row gap-10">
             <Link href="/pokedex">
               <Image
-                src={"/images/Pokemart_Exterior.png"}
-                alt={"Pokemart"}
-                width={150}
-                height={150}
+                alt="Pokemart"
                 className={`hover:scale-110 ${
                   isHoveringMarket ? "scale-110" : "scale-100"
                 }`}
+                height={150}
                 onMouseEnter={() => handleMouseEnter(true)}
                 onMouseLeave={() => handleMouseLeave(true)}
-              ></Image>
+                src="/images/Pokemart_Exterior.png"
+                width={150}
+               />
             </Link>
             <Image
-              src={"/images/Pokemon_Center_Exterior.png"}
-              alt={"Pokemart"}
-              width={150}
-              height={150}
+              alt="Pokemart"
               className={`hover:scale-110 ${
                 isHoveringPC ? "scale-110" : "scale-100"
               }`}
+              height={150}
               onMouseEnter={() => handleMouseEnter(false)}
               onMouseLeave={() => handleMouseLeave(false)}
-            ></Image>
+              src="/images/Pokemon_Center_Exterior.png"
+              width={150}
+             />
           </div>
 
           <div className="flex justify-center rounded border-8 border-double border-black bg-white text-4xl	">
@@ -60,11 +62,11 @@ export default function Home() {
                   }`}
                 >
                   <Image
-                    src={"/images/arrow.png"}
-                    alt={"Pokemart"}
-                    width={12}
+                    alt="Pokemart"
                     height={12}
-                  ></Image>
+                    src="/images/arrow.png"
+                    width={12}
+                   />
                 </div>
                 Check the Pokedex{" "}
               </li>
@@ -79,11 +81,11 @@ export default function Home() {
                   }`}
                 >
                   <Image
-                    src={"/images/arrow.png"}
-                    alt={"Pokemart"}
-                    width={12}
+                    alt="Pokemart"
                     height={12}
-                  ></Image>
+                    src="/images/arrow.png"
+                    width={12}
+                   />
                 </div>
                 Guess all Pokemon{" "}
               </li>

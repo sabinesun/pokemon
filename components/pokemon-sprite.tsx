@@ -1,41 +1,41 @@
-import useSWR from "swr";
 import { fetcher } from "@/lib/fetcher";
 import Image from "next/image";
+import useSWR from "swr";
 
 export type PokemonSpriteProps = {
-  name: string;
+  readonly name: string;
 };
 
 export const PokemonSprite = ({ name }: PokemonSpriteProps) => {
-  const {
-    data: pokemonData,
-    error: pokemonDataError,
-    isLoading: pokemonDataIsLoading,
-  } = useSWR(`https://pokeapi.co/api/v2/pokemon/${name}`, fetcher);
+  const { data, error, isLoading } = useSWR(
+    `https://pokeapi.co/api/v2/pokemon/${name}`,
+    fetcher,
+  );
 
-  if (pokemonDataError) {
+  if (error) {
     return <div>Error</div>;
   }
 
-  if (pokemonDataIsLoading) {
+  if (isLoading) {
     return (
       <div className="flex h-[96px] w-[96px] animate-pulse flex-wrap content-center justify-center">
         <Image
-          src={"/images/poke-ball.png"}
-          alt={"pokeball"}
-          width={32}
+          alt="pokeball"
           height={32}
-        ></Image>
+          src="/images/poke-ball.png"
+          width={32}
+        />
       </div>
     );
   }
+
   return (
     <div>
       <Image
-        src={pokemonData.sprites.front_default}
-        alt={pokemonData.name}
-        width={96}
+        alt={data?.name}
         height={96}
+        src={data?.sprites.front_default}
+        width={96}
       />
     </div>
   );
