@@ -1,4 +1,5 @@
 import { PokemonSprite } from "@/components/pokemon-sprite";
+import { Button } from "@/components/ui/button";
 import { fetcher } from "@/lib/fetcher";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
@@ -51,7 +52,7 @@ export const PokemonList = () => {
     return <div>Error: {error.message}</div>;
   }
 
-  const renderLoadingPlaceholders = (count) => {
+  const renderLoadingPlaceholders = (count: number) => {
     const placeholders = [];
     for (let index = 0; index < count; index++) {
       placeholders.push(
@@ -75,11 +76,10 @@ export const PokemonList = () => {
   return (
     <div className="flex w-full flex-col sm:w-[864px]">
       <div className="flex w-full flex-row justify-center gap-2">
-        <button
-          className="flex h-10 w-7 flex-wrap content-center justify-center rounded border-2 border-black bg-white"
+        <Button
+          className="w-7"
           disabled={currentPage === 1}
           onClick={() => setCurrentPage(currentPage - 1)}
-          type="button"
         >
           <Image
             alt="arrow"
@@ -88,20 +88,20 @@ export const PokemonList = () => {
             src="/images/arrow.png"
             width={24}
           />
-        </button>
+        </Button>
+
         <div className="flex h-10 w-3/5 flex-wrap content-center justify-center rounded border-2 border-black bg-white text-2xl">
           Box {currentPage}
         </div>
-        <button
-          className="flex h-10 w-7 flex-wrap content-center justify-center rounded border-2 border-black bg-white"
+        <Button
+          className="w-7"
           disabled={
             currentPage === Math.ceil(data?.results.count / totalPokemon)
           }
           onClick={() => setCurrentPage(currentPage + 1)}
-          type="button"
         >
           <Image alt="arrow" height={24} src="/images/arrow.png" width={24} />
-        </button>
+        </Button>
       </div>
 
       {isLoading ? (
