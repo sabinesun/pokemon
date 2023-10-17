@@ -17,7 +17,7 @@ export default function Home() {
   };
 
   return (
-    <main className="flex h-screen w-screen justify-center bg-[url('/images/grass.png')] align-middle font-pokemon-classic">
+    <main className="flex h-screen w-screen justify-center bg-[url('/images/grass.png')] align-middle font-pokemon-classic text-2xl">
       <div className="flex w-full flex-wrap content-center justify-center">
         <div className="space-y-8">
           <div className="flex justify-center text-8xl">WELCOME</div>
@@ -33,7 +33,7 @@ export default function Home() {
                 onMouseLeave={() => handleMouseLeave(true)}
                 src="/images/Pokemart_Exterior.png"
                 width={150}
-               />
+              />
             </Link>
             <Image
               alt="Pokemart"
@@ -45,7 +45,7 @@ export default function Home() {
               onMouseLeave={() => handleMouseLeave(false)}
               src="/images/Pokemon_Center_Exterior.png"
               width={150}
-             />
+            />
           </div>
 
           <div className="flex justify-center rounded border-8 border-double border-black bg-white text-4xl	">
@@ -66,7 +66,7 @@ export default function Home() {
                     height={12}
                     src="/images/arrow.png"
                     width={12}
-                   />
+                  />
                 </div>
                 Check the Pokedex{" "}
               </li>
@@ -85,7 +85,7 @@ export default function Home() {
                     height={12}
                     src="/images/arrow.png"
                     width={12}
-                   />
+                  />
                 </div>
                 Guess all Pokemon{" "}
               </li>

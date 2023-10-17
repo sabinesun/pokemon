@@ -41,10 +41,10 @@ export const PokemonList = () => {
     };
   });
 
-  const { data, error, isLoading } = useSWR<PokemonData[]>(
+  const { data, error, isLoading } = useSWR(
     `https://pokeapi.co/api/v2/pokemon/?limit=${totalPokemon}&offset=${
       (currentPage - 1) * totalPokemon
-    }`, // Include the offset variable
+    }`,
     fetcher,
   );
 
@@ -52,12 +52,14 @@ export const PokemonList = () => {
     return <div>Error: {error.message}</div>;
   }
 
+  const pokemonData: PokemonData[] | undefined = data?.results;
+
   const renderLoadingPlaceholders = (count: number) => {
     const placeholders = [];
     for (let index = 0; index < count; index++) {
       placeholders.push(
         <li key={`placeholder-${index}`}>
-          <div className="flex h-[96px] w-[96px] animate-pulse flex-wrap content-center justify-center">
+          <div className="flex h-[96px] w-[96px] flex-wrap content-center justify-center">
             <Image
               alt="pokeball"
               height={32}
@@ -113,7 +115,7 @@ export const PokemonList = () => {
       ) : (
         <div className="flex w-full flex-wrap sm:w-[864px]">
           <ul className="flex flex-wrap justify-center overflow-hidden">
-            {data?.results.map((pokemon: PokemonData) => (
+            {pokemonData?.map((pokemon) => (
               <li key={pokemon.name}>
                 <PokemonSprite name={pokemon.name} />
               </li>
