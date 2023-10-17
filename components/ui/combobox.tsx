@@ -1,3 +1,4 @@
+import { type PokemonType } from "@/app/pokedex/page";
 import { Button } from "@/components/ui/button";
 import {
   Command,
@@ -36,11 +37,6 @@ const pokemonType = [
   { label: "steel", value: "steel" },
   { label: "water", value: "water" },
 ];
-
-export type PokemonType = {
-  label: string;
-  value: string;
-};
 
 export type ComboboxProps = {
   readonly selectedType: PokemonType | null;

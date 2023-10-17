@@ -1,19 +1,28 @@
+// eslint-disable-next-line canonical/filename-match-exported
 "use client";
 
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 
-export default function Home() {
+const Home = () => {
   const [isHoveringMarket, setIsHoveringMarket] = useState(false);
   const [isHoveringPC, setIsHoveringPC] = useState(false);
 
   const handleMouseEnter = (market: boolean) => {
-    market ? setIsHoveringMarket(true) : setIsHoveringPC(true);
+    if (market) {
+      setIsHoveringMarket(true);
+    } else {
+      setIsHoveringPC(true);
+    }
   };
 
   const handleMouseLeave = (market: boolean) => {
-    market ? setIsHoveringMarket(false) : setIsHoveringPC(false);
+    if (market) {
+      setIsHoveringMarket(false);
+    } else {
+      setIsHoveringPC(false);
+    }
   };
 
   return (
@@ -95,4 +104,6 @@ export default function Home() {
       </div>
     </main>
   );
-}
+};
+
+export default Home;

@@ -1,3 +1,4 @@
+// eslint-disable-next-line canonical/filename-match-exported,import/no-unassigned-import
 import "./globals.css";
 import { type Metadata } from "next";
 import { Inter } from "next/font/google";
@@ -9,14 +10,12 @@ export const metadata: Metadata = {
   title: "Create Next App",
 };
 
-export default function RootLayout({
-  children,
-}: {
-  readonly children: React.ReactNode;
-}) {
+const RootLayout = ({ children }: { readonly children: React.ReactNode }) => {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={`overflow-hidden ${inter.className}`}>{children}</body>
     </html>
   );
-}
+};
+
+export default RootLayout;
