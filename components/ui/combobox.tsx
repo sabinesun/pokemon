@@ -50,10 +50,10 @@ export const ComboboxPopover = ({
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="mx-4 flex items-center space-x-4 py-1">
+    <div className="mx-4 flex items-center pb-3">
       <Popover onOpenChange={setOpen} open={open}>
         <PopoverTrigger asChild>
-          <Button className="h-8 w-[125px] justify-center ">
+          <Button className="w-[125px] justify-center ">
             {selectedType ? <>{selectedType.label}</> : <> Filter Type </>}
           </Button>
         </PopoverTrigger>

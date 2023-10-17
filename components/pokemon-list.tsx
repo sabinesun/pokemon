@@ -7,6 +7,7 @@ import useSWR from "swr";
 
 export type PokemonData = {
   name: string;
+  url: string;
 };
 
 export const PokemonList = () => {
@@ -79,7 +80,7 @@ export const PokemonList = () => {
     <div className="flex w-full flex-col sm:w-[864px]">
       <div className="flex w-full flex-row justify-center gap-2">
         <Button
-          className="w-7"
+          className="h-10 w-7"
           disabled={currentPage === 1}
           onClick={() => setCurrentPage(currentPage - 1)}
         >
@@ -96,10 +97,8 @@ export const PokemonList = () => {
           Box {currentPage}
         </div>
         <Button
-          className="w-7"
-          disabled={
-            currentPage === Math.ceil(data?.results.count / totalPokemon)
-          }
+          className="h-10 w-7"
+          disabled={currentPage === Math.ceil(151 / totalPokemon)}
           onClick={() => setCurrentPage(currentPage + 1)}
         >
           <Image alt="arrow" height={24} src="/images/arrow.png" width={24} />
@@ -117,7 +116,9 @@ export const PokemonList = () => {
           <ul className="flex flex-wrap justify-center overflow-hidden">
             {pokemonData?.map((pokemon) => (
               <li key={pokemon.name}>
-                <PokemonSprite name={pokemon.name} />
+                {Number(
+                  pokemon.url.split("/")[pokemon.url.split("/").length - 2],
+                ) < 152 && <PokemonSprite name={pokemon.name} />}
               </li>
             ))}
           </ul>

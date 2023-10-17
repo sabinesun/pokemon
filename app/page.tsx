@@ -40,6 +40,7 @@ const Home = () => {
                 height={150}
                 onMouseEnter={() => handleMouseEnter(true)}
                 onMouseLeave={() => handleMouseLeave(true)}
+                priority
                 src="/images/Pokemart_Exterior.png"
                 width={150}
               />
@@ -52,6 +53,7 @@ const Home = () => {
               height={150}
               onMouseEnter={() => handleMouseEnter(false)}
               onMouseLeave={() => handleMouseLeave(false)}
+              priority
               src="/images/Pokemon_Center_Exterior.png"
               width={150}
             />
