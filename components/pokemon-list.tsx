@@ -64,6 +64,19 @@ export const PokemonList = ({ selectedType }: PokemonSpriteProps) => {
     return <div>Error: {error.message}</div>;
   }
 
+  let totalPokemonByType = 0;
+
+  if (selectedType && selectedType?.label !== "all") {
+    data?.pokemon?.map((pokemonByType: PokemonDataByType) => {
+      const matches = pokemonByType.pokemon.url.match(/\d+/gu);
+      if (matches && Number(matches[1]) < 152) {
+        totalPokemonByType++;
+      }
+
+      return totalPokemonByType;
+    });
+  }
+
   return (
     <div className="flex w-full flex-col sm:w-[864px]">
       <div className="flex w-full flex-row justify-center gap-2">
@@ -86,7 +99,11 @@ export const PokemonList = ({ selectedType }: PokemonSpriteProps) => {
         </div>
         <Button
           className="h-10 w-7"
-          disabled={currentPage === Math.ceil(151 / totalPokemon)}
+          disabled={
+            selectedType?.label === undefined || selectedType?.label === "all"
+              ? currentPage === Math.ceil(151 / totalPokemon)
+              : currentPage === Math.ceil(totalPokemonByType / totalPokemon)
+          }
           onClick={() => setCurrentPage(currentPage + 1)}
         >
           <Image alt="arrow" height={24} src="/images/arrow.png" width={24} />
