@@ -19,7 +19,6 @@ import * as React from "react";
 const pokemonType = [
   { label: "all", value: "all" },
   { label: "bug", value: "bug" },
-  { label: "dark", value: "dark" },
   { label: "dragon", value: "dragon" },
   { label: "electric", value: "electric" },
   { label: "fairy", value: "fairy" },

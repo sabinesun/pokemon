@@ -9,9 +9,8 @@ const nextConfig = {
         protocol: "https",
       },
     ],
+    unoptimized: true,
   },
 };
-
-module.exports = nextConfig;
 
 module.exports = nextConfig;

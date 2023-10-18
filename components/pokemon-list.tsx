@@ -1,3 +1,4 @@
+import { type PokemonType } from "@/app/pokedex/page";
 import { PokemonSprite } from "@/components/pokemon-sprite";
 import { Button } from "@/components/ui/button";
 import { fetcher } from "@/lib/fetcher";
@@ -10,7 +11,15 @@ export type PokemonData = {
   url: string;
 };
 
-export const PokemonList = () => {
+export type PokemonDataByType = {
+  pokemon: PokemonData;
+};
+
+export type PokemonSpriteProps = {
+  readonly selectedType: PokemonType | null;
+};
+
+export const PokemonList = ({ selectedType }: PokemonSpriteProps) => {
   const [dimensions, setDimensions] = useState({
     height: window.innerHeight,
     width: window.innerWidth < 640 ? window.innerWidth : 863,
@@ -42,39 +51,18 @@ export const PokemonList = () => {
     };
   });
 
-  const { data, error, isLoading } = useSWR(
-    `https://pokeapi.co/api/v2/pokemon/?limit=${totalPokemon}&offset=${
-      (currentPage - 1) * totalPokemon
-    }`,
-    fetcher,
-  );
+  const api =
+    selectedType === null || selectedType?.label === "all"
+      ? `https://pokeapi.co/api/v2/pokemon/?limit=${totalPokemon}&offset=${
+          (currentPage - 1) * totalPokemon
+        }`
+      : `https://pokeapi.co/api/v2/type/${selectedType?.label}`;
+
+  const { data, error, isLoading } = useSWR(api, fetcher);
 
   if (error) {
     return <div>Error: {error.message}</div>;
   }
-
-  const pokemonData: PokemonData[] | undefined = data?.results;
-
-  const renderLoadingPlaceholders = (count: number) => {
-    const placeholders = [];
-    for (let index = 0; index < count; index++) {
-      placeholders.push(
-        <li key={`placeholder-${index}`}>
-          <div className="flex h-[96px] w-[96px] flex-wrap content-center justify-center">
-            <Image
-              alt="pokeball"
-              height={32}
-              priority
-              src="/images/poke-ball.png"
-              width={32}
-            />
-          </div>
-        </li>,
-      );
-    }
-
-    return placeholders;
-  };
 
   return (
     <div className="flex w-full flex-col sm:w-[864px]">
@@ -106,21 +94,31 @@ export const PokemonList = () => {
       </div>
 
       {isLoading ? (
-        <div className="flex w-full flex-wrap sm:w-[864px]">
-          <ul className="flex flex-wrap justify-center overflow-hidden">
-            {renderLoadingPlaceholders(totalPokemon)}
-          </ul>
+        <div className="flex w-full flex-1 flex-wrap content-center justify-center sm:w-[864px]">
+          <div>
+            <Image
+              alt="pokeball"
+              height={192}
+              src="/images/pikachuSprint.gif"
+              unoptimized
+              width={192}
+            />
+          </div>
         </div>
       ) : (
-        <div className="flex w-full flex-wrap sm:w-[864px]">
+        <div className="flex w-full flex-wrap justify-center sm:w-[864px]">
           <ul className="flex flex-wrap justify-center overflow-hidden">
-            {pokemonData?.map((pokemon) => (
-              <li key={pokemon.name}>
-                {Number(
-                  pokemon.url.split("/")[pokemon.url.split("/").length - 2],
-                ) < 152 && <PokemonSprite name={pokemon.name} />}
-              </li>
-            ))}
+            {selectedType?.label === undefined || selectedType?.label === "all"
+              ? data?.results?.map((pokemon: PokemonData) => (
+                  <li key={pokemon.name}>
+                    <PokemonSprite url={pokemon.url} />
+                  </li>
+                ))
+              : data?.pokemon?.map((pokemonByType: PokemonDataByType) => (
+                  <li key={pokemonByType.pokemon.name}>
+                    <PokemonSprite url={pokemonByType.pokemon.url} />
+                  </li>
+                ))}
           </ul>
         </div>
       )}

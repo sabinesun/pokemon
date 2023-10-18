@@ -33,7 +33,7 @@ const PokedexPage = () => {
         </div>
 
         <div className="flex h-5/6 w-full gap-5">
-          <PokemonList />
+          <PokemonList selectedType={selectedType} />
         </div>
       </div>
     </main>
