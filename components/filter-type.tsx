@@ -42,14 +42,14 @@ export type ComboboxProps = {
   readonly setSelectedType: Dispatch<SetStateAction<PokemonType | null>>;
 };
 
-export const ComboboxPopover = ({
+export const FilterType = ({
   selectedType,
   setSelectedType,
 }: ComboboxProps) => {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="mx-4 flex items-center pb-3">
+    <div className=" flex items-center pb-3">
       <Popover onOpenChange={setOpen} open={open}>
         <PopoverTrigger asChild>
           <Button className="w-[125px] justify-center ">

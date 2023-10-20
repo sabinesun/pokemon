@@ -1,12 +1,13 @@
 // eslint-disable-next-line canonical/filename-match-exported
 "use client";
 
+import { FilterType } from "@/components/filter-type";
 import { PokemonList } from "@/components/pokemon-list";
 import { Button } from "@/components/ui/button";
-import { ComboboxPopover } from "@/components/ui/combobox";
+import { Input } from "@/components/ui/input";
 import Link from "next/link";
 import * as React from "react";
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 export type PokemonType = {
   label: string;
@@ -15,6 +16,13 @@ export type PokemonType = {
 
 const PokedexPage = () => {
   const [selectedType, setSelectedType] = useState<PokemonType | null>(null);
+
+  const inputRef = useRef(null);
+  const [inputValue, setInputValue] = useState<string | null>(null);
+
+  const handleChange = () => {
+    setInputValue(inputRef.current?.value);
+  };
 
   return (
     <main className="flex h-screen w-screen overflow-hidden bg-[url('/images/grass.png')]  font-pokemon-classic">
@@ -25,15 +33,21 @@ const PokedexPage = () => {
             <Button className="p-2"> Back </Button>
           </Link>
         </div>
-        <div className="flex">
-          <ComboboxPopover
+        <div className="flex gap-2 px-2">
+          <Input
+            onChange={handleChange}
+            placeholder="Pokemon name"
+            ref={inputRef}
+          />
+
+          <FilterType
             selectedType={selectedType}
             setSelectedType={setSelectedType}
           />
         </div>
 
         <div className="flex h-5/6 w-full gap-5">
-          <PokemonList selectedType={selectedType} />
+          <PokemonList inputValue={inputValue} selectedType={selectedType} />
         </div>
       </div>
     </main>

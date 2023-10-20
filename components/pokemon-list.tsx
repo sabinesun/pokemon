@@ -16,10 +16,14 @@ export type PokemonDataByType = {
 };
 
 export type PokemonSpriteProps = {
+  readonly inputValue: string | null;
   readonly selectedType: PokemonType | null;
 };
 
-export const PokemonList = ({ selectedType }: PokemonSpriteProps) => {
+export const PokemonList = ({
+  selectedType,
+  inputValue,
+}: PokemonSpriteProps) => {
   const [dimensions, setDimensions] = useState({
     height: window.innerHeight,
     width: window.innerWidth < 640 ? window.innerWidth : 863,
@@ -32,6 +36,7 @@ export const PokemonList = ({ selectedType }: PokemonSpriteProps) => {
   };
 
   const [totalPokemon, setTotalPokemon] = useState(calculateTotalPokemon());
+
   const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
