@@ -16,7 +16,7 @@ export type PokemonDataByType = {
 };
 
 export type PokemonSpriteProps = {
-  readonly inputValue: string | null;
+  readonly inputValue: string;
   readonly selectedType: PokemonType | null;
 };
 
@@ -36,7 +36,6 @@ export const PokemonList = ({
   };
 
   const [totalPokemon, setTotalPokemon] = useState(calculateTotalPokemon());
-
   const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
@@ -82,6 +81,9 @@ export const PokemonList = ({
     });
   }
 
+  // eslint-disable-next-line no-console
+  console.log(inputValue);
+
   return (
     <div className="flex w-full flex-col sm:w-[864px]">
       <div className="flex w-full flex-row justify-center gap-2">
@@ -102,6 +104,7 @@ export const PokemonList = ({
         <div className="flex h-10 w-3/5 flex-wrap content-center justify-center rounded border-2 border-black bg-white text-2xl">
           Box {currentPage}
         </div>
+
         <Button
           className="h-10 w-7"
           disabled={
