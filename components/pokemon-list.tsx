@@ -55,6 +55,10 @@ export const PokemonList = ({
     };
   });
 
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [selectedType]);
+
   const api =
     selectedType === null || selectedType?.label === "all"
       ? `https://pokeapi.co/api/v2/pokemon/?limit=${totalPokemon}&offset=${
@@ -80,9 +84,6 @@ export const PokemonList = ({
       return totalPokemonByType;
     });
   }
-
-  // eslint-disable-next-line no-console
-  console.log(inputValue);
 
   return (
     <div className="flex w-full flex-col sm:w-[864px]">
