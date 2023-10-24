@@ -83,12 +83,20 @@ export const PokemonList = ({
     });
   }
 
+  const pokemonBySearch = data?.results.filter(
+    (pokemon: { name: string; url: string }) =>
+      pokemon.name.includes(inputValue),
+  );
+
   const startIndex = (currentPage - 1) * totalPokemon;
   const endIndex = startIndex + totalPokemon;
+
   const displayedPokemon =
-    selectedType && selectedType?.label !== "all"
-      ? data?.pokemon?.slice(startIndex, endIndex)
-      : data?.results?.slice(startIndex, endIndex);
+    inputValue === ""
+      ? selectedType && selectedType?.label !== "all"
+        ? data?.pokemon?.slice(startIndex, endIndex)
+        : data?.results?.slice(startIndex, endIndex)
+      : pokemonBySearch.slice(startIndex, endIndex);
 
   return (
     <div className="flex w-full flex-col sm:w-[864px]">
