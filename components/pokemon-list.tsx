@@ -61,9 +61,7 @@ export const PokemonList = ({
 
   const api =
     selectedType === null || selectedType?.label === "all"
-      ? `https://pokeapi.co/api/v2/pokemon/?limit=${totalPokemon}&offset=${
-          (currentPage - 1) * totalPokemon
-        }`
+      ? `https://pokeapi.co/api/v2/pokemon/?limit=151`
       : `https://pokeapi.co/api/v2/type/${selectedType?.label}`;
 
   const { data, error, isLoading } = useSWR(api, fetcher);
@@ -87,7 +85,10 @@ export const PokemonList = ({
 
   const startIndex = (currentPage - 1) * totalPokemon;
   const endIndex = startIndex + totalPokemon;
-  const displayedPokemon = data?.pokemon?.slice(startIndex, endIndex);
+  const displayedPokemon =
+    selectedType && selectedType?.label !== "all"
+      ? data?.pokemon?.slice(startIndex, endIndex)
+      : data?.results?.slice(startIndex, endIndex);
 
   return (
     <div className="flex w-full flex-col sm:w-[864px]">
@@ -139,7 +140,7 @@ export const PokemonList = ({
         <div className="flex w-full flex-wrap justify-center sm:w-[864px]">
           <ul className="flex flex-wrap justify-center overflow-hidden">
             {selectedType?.label === undefined || selectedType?.label === "all"
-              ? data?.results?.map((pokemon: PokemonData) => (
+              ? displayedPokemon.map((pokemon: PokemonData) => (
                   <li key={pokemon.name}>
                     <PokemonSprite url={pokemon.url} />
                   </li>
