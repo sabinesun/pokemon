@@ -85,6 +85,10 @@ export const PokemonList = ({
     });
   }
 
+  const startIndex = (currentPage - 1) * totalPokemon;
+  const endIndex = startIndex + totalPokemon;
+  const displayedPokemon = data?.pokemon?.slice(startIndex, endIndex);
+
   return (
     <div className="flex w-full flex-col sm:w-[864px]">
       <div className="flex w-full flex-row justify-center gap-2">
@@ -140,11 +144,14 @@ export const PokemonList = ({
                     <PokemonSprite url={pokemon.url} />
                   </li>
                 ))
-              : data?.pokemon?.map((pokemonByType: PokemonDataByType) => (
-                  <li key={pokemonByType.pokemon.name}>
-                    <PokemonSprite url={pokemonByType.pokemon.url} />
-                  </li>
-                ))}
+              : displayedPokemon.map(
+                  (pokemonByType: PokemonDataByType, index: number) =>
+                    index < totalPokemon && (
+                      <li key={pokemonByType.pokemon.name}>
+                        <PokemonSprite url={pokemonByType.pokemon.url} />
+                      </li>
+                    ),
+                )}
           </ul>
         </div>
       )}
