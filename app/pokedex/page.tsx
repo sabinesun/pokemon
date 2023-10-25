@@ -22,13 +22,13 @@ const PokedexPage = () => {
   return (
     <main className="flex h-screen w-screen overflow-hidden bg-[url('/images/grass.png')]  font-pokemon-classic">
       <div className="flex h-full w-full flex-col justify-between">
-        <div className="flex flex-wrap items-center justify-between p-2 sm:p-4">
+        <div className="flex flex-wrap items-center justify-between p-2 md:p-4">
           <h1 className="text-6xl">MY POKEDEX</h1>
           <Link href="/">
             <Button className="p-2"> Back </Button>
           </Link>
         </div>
-        <div className="flex gap-2 px-2">
+        <div className="flex w-full gap-2 px-2 md:w-[768px] ">
           <FilterType
             selectedType={selectedType}
             setSelectedType={setSelectedType}

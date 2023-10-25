@@ -30,15 +30,11 @@ export const PokemonList = ({
   });
   const numberWidthPokemon = Math.trunc(dimensions.width / 96);
   const numberHeightPokemon = Math.trunc(
-    (dimensions.height * (5 / 6) - 40) / 96,
+    (dimensions.height * (5 / 6) - 30) / 96,
   );
 
-  const calculateTotalPokemon = () => {
-    return numberWidthPokemon * numberHeightPokemon;
-  };
-
   const [totalPokemonByPage, setTotalPokemonByPage] = useState(
-    calculateTotalPokemon(),
+    numberWidthPokemon * numberHeightPokemon,
   );
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -49,7 +45,7 @@ export const PokemonList = ({
         width: window.innerWidth < 640 ? window.innerWidth : 863,
       };
       setDimensions(newDimensions);
-      setTotalPokemonByPage(calculateTotalPokemon());
+      setTotalPokemonByPage(numberWidthPokemon * numberHeightPokemon);
     };
 
     window.addEventListener("resize", handleResize);
@@ -113,7 +109,7 @@ export const PokemonList = ({
   };
 
   return (
-    <div className="flex w-full flex-col sm:w-[864px]">
+    <div className="flex w-full flex-col md:w-[768px]">
       <div className="flex w-full flex-row justify-center gap-2">
         <Button
           className="h-10 w-7"
@@ -148,7 +144,7 @@ export const PokemonList = ({
       </div>
 
       {isLoading ? (
-        <div className="flex w-full flex-1 flex-wrap content-center justify-center sm:w-[864px]">
+        <div className="flex w-full flex-1 flex-wrap content-center justify-center md:w-[768px]">
           <div>
             <Image
               alt="pokeball"
@@ -160,7 +156,7 @@ export const PokemonList = ({
           </div>
         </div>
       ) : (
-        <div className="flex w-full flex-wrap justify-center sm:w-[864px]">
+        <div className="flex w-full flex-wrap justify-center md:w-[768px]">
           <div
             style={{
               display: "grid",
