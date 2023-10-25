@@ -28,10 +28,12 @@ export const PokemonList = ({
     height: window.innerHeight,
     width: window.innerWidth < 640 ? window.innerWidth : 863,
   });
+  const numberWidthPokemon = Math.trunc(dimensions.width / 96);
+  const numberHeightPokemon = Math.trunc(
+    (dimensions.height * (5 / 6) - 40) / 96,
+  );
 
   const calculateTotalPokemon = () => {
-    const numberHeightPokemon = Math.trunc((dimensions.height * (5 / 6)) / 96);
-    const numberWidthPokemon = Math.trunc(dimensions.width / 96);
     return numberWidthPokemon * numberHeightPokemon;
   };
 
@@ -159,22 +161,28 @@ export const PokemonList = ({
         </div>
       ) : (
         <div className="flex w-full flex-wrap justify-center sm:w-[864px]">
-          <ul className="flex flex-wrap justify-center overflow-hidden">
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns:
+                "repeat(" + numberWidthPokemon + " , minmax(0, 96px))",
+            }}
+          >
             {selectedType?.label === undefined || selectedType?.label === "all"
               ? displayedPokemon().map((pokemon: PokemonData) => (
-                  <li key={pokemon.name}>
+                  <div key={pokemon.name}>
                     <PokemonSprite url={pokemon.url} />
-                  </li>
+                  </div>
                 ))
               : displayedPokemon().map(
                   (pokemonByType: PokemonDataByType, index: number) =>
                     index < totalPokemonByPage && (
-                      <li key={pokemonByType.pokemon.name}>
+                      <div key={pokemonByType.pokemon.name}>
                         <PokemonSprite url={pokemonByType.pokemon.url} />
-                      </li>
+                      </div>
                     ),
                 )}
-          </ul>
+          </div>
         </div>
       )}
     </div>
