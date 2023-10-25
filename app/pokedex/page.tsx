@@ -29,15 +29,14 @@ const PokedexPage = () => {
           </Link>
         </div>
         <div className="flex gap-2 px-2">
+          <FilterType
+            selectedType={selectedType}
+            setSelectedType={setSelectedType}
+          />
           <Input
             onChange={(event) => setInputValue(event.target.value)}
             placeholder="Pokemon name"
             value={inputValue}
-          />
-
-          <FilterType
-            selectedType={selectedType}
-            setSelectedType={setSelectedType}
           />
         </div>
 

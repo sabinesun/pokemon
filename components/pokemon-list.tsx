@@ -35,7 +35,9 @@ export const PokemonList = ({
     return numberWidthPokemon * numberHeightPokemon;
   };
 
-  const [totalPokemon, setTotalPokemon] = useState(calculateTotalPokemon());
+  const [totalPokemonByPage, setTotalPokemonByPage] = useState(
+    calculateTotalPokemon(),
+  );
   const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
@@ -45,7 +47,7 @@ export const PokemonList = ({
         width: window.innerWidth < 640 ? window.innerWidth : 863,
       };
       setDimensions(newDimensions);
-      setTotalPokemon(calculateTotalPokemon());
+      setTotalPokemonByPage(calculateTotalPokemon());
     };
 
     window.addEventListener("resize", handleResize);
@@ -83,20 +85,30 @@ export const PokemonList = ({
     });
   }
 
-  const pokemonBySearch = data?.results.filter(
-    (pokemon: { name: string; url: string }) =>
-      pokemon.name.includes(inputValue),
-  );
+  const displayedPokemon = () => {
+    const startIndex = (currentPage - 1) * totalPokemonByPage;
+    const endIndex = startIndex + totalPokemonByPage;
 
-  const startIndex = (currentPage - 1) * totalPokemon;
-  const endIndex = startIndex + totalPokemon;
+    const isTypeSelected = selectedType && selectedType.label !== "all";
+    const isSearchingPokemon = inputValue.trim() === "";
+    let listDisplayedPokemon;
 
-  const displayedPokemon =
-    inputValue === ""
-      ? selectedType && selectedType?.label !== "all"
-        ? data?.pokemon?.slice(startIndex, endIndex)
-        : data?.results?.slice(startIndex, endIndex)
-      : pokemonBySearch.slice(startIndex, endIndex);
+    if (isTypeSelected) {
+      listDisplayedPokemon = isSearchingPokemon
+        ? (listDisplayedPokemon = data.pokemon)
+        : data?.pokemon?.filter((pokemonByType: PokemonDataByType) =>
+            pokemonByType.pokemon.name.includes(inputValue.trim()),
+          );
+    } else {
+      listDisplayedPokemon = isSearchingPokemon
+        ? (listDisplayedPokemon = data.results)
+        : data?.results?.filter((pokemon: PokemonData) =>
+            pokemon.name.includes(inputValue.trim()),
+          );
+    }
+
+    return listDisplayedPokemon.slice(startIndex, endIndex);
+  };
 
   return (
     <div className="flex w-full flex-col sm:w-[864px]">
@@ -123,8 +135,9 @@ export const PokemonList = ({
           className="h-10 w-7"
           disabled={
             selectedType?.label === undefined || selectedType?.label === "all"
-              ? currentPage === Math.ceil(151 / totalPokemon)
-              : currentPage === Math.ceil(totalPokemonByType / totalPokemon)
+              ? currentPage === Math.ceil(151 / totalPokemonByPage)
+              : currentPage ===
+                Math.ceil(totalPokemonByType / totalPokemonByPage)
           }
           onClick={() => setCurrentPage(currentPage + 1)}
         >
@@ -148,14 +161,14 @@ export const PokemonList = ({
         <div className="flex w-full flex-wrap justify-center sm:w-[864px]">
           <ul className="flex flex-wrap justify-center overflow-hidden">
             {selectedType?.label === undefined || selectedType?.label === "all"
-              ? displayedPokemon.map((pokemon: PokemonData) => (
+              ? displayedPokemon().map((pokemon: PokemonData) => (
                   <li key={pokemon.name}>
                     <PokemonSprite url={pokemon.url} />
                   </li>
                 ))
-              : displayedPokemon.map(
+              : displayedPokemon().map(
                   (pokemonByType: PokemonDataByType, index: number) =>
-                    index < totalPokemon && (
+                    index < totalPokemonByPage && (
                       <li key={pokemonByType.pokemon.name}>
                         <PokemonSprite url={pokemonByType.pokemon.url} />
                       </li>
