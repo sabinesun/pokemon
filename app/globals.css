@@ -14,4 +14,24 @@
   body {
 
   }
+  :root {
+    --color-bug:#43946C;
+    --color-grass:#5ABE79;
+    --color-dragon:#61C1B6;
+    --color-steel:#8FDFAB;
+    --color-dark:#444649;
+    --color-flying:#8E9BAB;
+    --color-normal:#B98EB7;
+    --color-ghost:#91589D;
+    --color-rock:#5D3515;
+    --color-ground:#815831;
+    --color-fighting:#B95821;
+    --color-fire:#DC3E2D;
+    --color-electric:#F5C242;
+    --color-poison:#6846F6;
+    --color-psychic:#C92AB1;
+    --color-fairy:#DC506A;
+    --color-water:#4960E6;
+    --color-ice:#A2DEED;
+  }
 }

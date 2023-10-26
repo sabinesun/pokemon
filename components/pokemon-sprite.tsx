@@ -1,6 +1,6 @@
-import { type PokemonType } from "@/app/pokedex/page";
 import { fetcher } from "@/lib/fetcher";
 import Image from "next/image";
+import Link from "next/link";
 import useSWR from "swr";
 
 export type PokemonSpriteProps = {
@@ -15,14 +15,16 @@ export const PokemonSprite = ({ url }: PokemonSpriteProps) => {
   }
 
   return (
-    <div>
+    <div className="h-[96px]">
       {data?.id < 152 && (
-        <Image
-          alt={data?.name}
-          height={96}
-          src={data?.sprites.front_default}
-          width={96}
-        />
+        <Link href={"/pokedex/" + data?.name}>
+          <Image
+            alt={data?.name}
+            height={96}
+            src={data?.sprites.versions["generation-viii"].icons.front_default}
+            width={96}
+          />
+        </Link>
       )}
     </div>
   );
