@@ -57,7 +57,7 @@ export const PokemonList = ({
 
   useEffect(() => {
     setCurrentPage(1);
-  }, [selectedType]);
+  }, [selectedType, inputValue]);
 
   const api =
     selectedType === null || selectedType?.label === "all"
