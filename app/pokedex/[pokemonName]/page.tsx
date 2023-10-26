@@ -34,13 +34,13 @@ const Page = ({ params }: { readonly params: { pokemonName: string } }) => {
           <Button className="p-2"> Back </Button>
         </Link>
       </div>
-      <div className="flex justify-center">
+      <div className="flex h-1/2 justify-center">
         <div
-          className="flex h-80 w-80 flex-wrap  justify-center bg-cover bg-no-repeat text-3xl"
+          className="flex h-full w-full flex-wrap  justify-center bg-cover bg-no-repeat text-3xl"
           style={{ backgroundImage: `url(${data?.sprites.front_default}` }}
         />
       </div>
-      <div className="flex-1 rounded border-2 border-black bg-white">
+      <div className="flex flex-1 flex-col rounded border-2 border-black bg-white text-lg">
         <ul className="flex flex-row flex-wrap justify-around border-b p-1">
           <li>About</li>
           <li>Stats</li>
