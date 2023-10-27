@@ -30,7 +30,7 @@ export const PokemonAbout = ({
   }
 
   return (
-    <div className="flex max-h-56 flex-1 flex-col justify-between p-4">
+    <div className="flex max-h-56 flex-1 flex-col justify-between p-4 ">
       <div className="leading-5">
         {data.flavor_text_entries[0].flavor_text}{" "}
       </div>

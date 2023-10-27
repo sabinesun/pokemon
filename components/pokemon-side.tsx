@@ -1,3 +1,5 @@
+"use client";
+
 import { type PokemonType } from "@/app/pokedex/page";
 import { FilterType } from "@/components/filter-type";
 import { PokemonList } from "@/components/pokemon-list";
@@ -10,7 +12,7 @@ export const PokemonSide = () => {
   const [inputValue, setInputValue] = useState<string>("");
 
   return (
-    <>
+    <div>
       <div className="flex w-full gap-2 px-2 md:w-[768px] ">
         <FilterType
           selectedType={selectedType}
@@ -25,6 +27,6 @@ export const PokemonSide = () => {
       <div className="flex h-5/6 w-full gap-5">
         <PokemonList inputValue={inputValue} selectedType={selectedType} />
       </div>
-    </>
+    </div>
   );
 };
