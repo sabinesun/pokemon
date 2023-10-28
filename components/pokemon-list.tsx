@@ -38,6 +38,8 @@ export const PokemonList = ({
   );
   const [currentPage, setCurrentPage] = useState(1);
 
+  const [selectedPokemon, setSelectedPokemon] = useState("");
+
   useEffect(() => {
     const handleResize = () => {
       const newDimensions = {
@@ -167,14 +169,22 @@ export const PokemonList = ({
             {selectedType?.label === undefined || selectedType?.label === "all"
               ? displayedPokemon().map((pokemon: PokemonData) => (
                   <div key={pokemon.name}>
-                    <PokemonSprite url={pokemon.url} />
+                    <PokemonSprite
+                      selectedPokemon={selectedPokemon}
+                      setSelectedPokemon={setSelectedPokemon}
+                      url={pokemon.url}
+                    />
                   </div>
                 ))
               : displayedPokemon().map(
                   (pokemonByType: PokemonDataByType, index: number) =>
                     index < totalPokemonByPage && (
                       <div key={pokemonByType.pokemon.name}>
-                        <PokemonSprite url={pokemonByType.pokemon.url} />
+                        <PokemonSprite
+                          selectedPokemon={selectedPokemon}
+                          setSelectedPokemon={setSelectedPokemon}
+                          url={pokemonByType.pokemon.url}
+                        />
                       </div>
                     ),
                 )}

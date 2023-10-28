@@ -6,9 +6,11 @@ import { Button } from "@/components/ui/button";
 import { fetcher } from "@/lib/fetcher";
 import Link from "next/link";
 import * as React from "react";
+import { useState } from "react";
 import useSWR from "swr";
 
 const Page = ({ params }: { readonly params: { pokemonName: string } }) => {
+  const [menu, setMenu] = useState<string>("about");
   const { data, isLoading } = useSWR(
     `https://pokeapi.co/api/v2/pokemon/${params.pokemonName}`,
     fetcher,
@@ -37,22 +39,26 @@ const Page = ({ params }: { readonly params: { pokemonName: string } }) => {
         </div>
         <div className="flex h-1/2 justify-center">
           <div
-            className="flex h-full w-full flex-wrap  justify-center bg-cover bg-no-repeat text-3xl"
+            className="flex h-full w-full flex-wrap  justify-center bg-cover bg-no-repeat text-3xl "
             style={{ backgroundImage: `url(${data?.sprites.front_default}` }}
           />
         </div>
         <div className="flex flex-1 flex-col rounded border-2 border-black bg-white text-lg">
-          <ul className="flex flex-row flex-wrap justify-around border-b p-1">
-            <li>About</li>
-            <li>Stats</li>
-            <li>Evolution</li>
+          <ul className="flex flex-row flex-wrap justify-around p-1">
+            <li onClick={() => setMenu("about")}>About</li>
+            <li onClick={() => setMenu("stats")}>Stats </li>
+            <li onClick={() => setMenu("evolution")}>Evolution</li>
           </ul>
-          <PokemonAbout
-            height={data.height}
-            species={data.species.url}
-            types={data.types}
-            weight={data.weight}
-          />
+
+          {menu === "about" && (
+            <PokemonAbout
+              height={data.height}
+              species={data.species.url}
+              types={data.types}
+              weight={data.weight}
+            />
+          )}
+          {menu === "stats" && <div>test</div>}
         </div>
       </div>
     </div>
