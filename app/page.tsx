@@ -41,7 +41,7 @@ const Home = () => {
                 onMouseEnter={() => handleMouseEnter(true)}
                 onMouseLeave={() => handleMouseLeave(true)}
                 priority
-                src="/images/Pokemart_Exterior.png"
+                src="/images/pokemart-Exterior.png"
                 width={150}
               />
             </Link>
@@ -54,7 +54,7 @@ const Home = () => {
               onMouseEnter={() => handleMouseEnter(false)}
               onMouseLeave={() => handleMouseLeave(false)}
               priority
-              src="/images/Pokemon_Center_Exterior.png"
+              src="/images/pokemon-center-exterior.png"
               width={150}
             />
           </div>

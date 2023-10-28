@@ -151,7 +151,7 @@ export const PokemonList = ({
             <Image
               alt="pokeball"
               height={192}
-              src="/images/pikachuSprint.gif"
+              src="/images/pikachu-sprint.gif"
               unoptimized
               width={192}
             />
