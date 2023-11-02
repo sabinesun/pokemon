@@ -15,5 +15,9 @@ export const ClientOnly = ({ children, ...delegated }: ClientOnlyProps) => {
     return null;
   }
 
-  return <div {...delegated}>{children}</div>;
+  return (
+    <div {...delegated} className="w-full">
+      {children}
+    </div>
+  );
 };

@@ -24,12 +24,60 @@ const Page = ({ params }: { readonly params: { pokemonName: string } }) => {
     );
   }
 
+  let aboutBorder = "";
+  switch (menu) {
+    case "about":
+      aboutBorder = "border-0 rounded-none";
+      break;
+    case "stats":
+      aboutBorder = "border-r border-b rounded-br";
+      break;
+    case "evolution":
+      aboutBorder = "border-b border-r-0 rounded-none";
+      break;
+    default:
+      aboutBorder = "border-0 rounded-none";
+      break;
+  }
+
+  let statsBorder = "";
+  switch (menu) {
+    case "about":
+      statsBorder = "border-l border-b rounded-bl ";
+      break;
+    case "stats":
+      statsBorder = "border-0 rounded-none";
+      break;
+    case "evolution":
+      statsBorder = "border-b border-r rounded-br";
+      break;
+    default:
+      statsBorder = "border-0 rounded-none";
+      break;
+  }
+
+  let evolutionBorder = "";
+  switch (menu) {
+    case "about":
+      evolutionBorder = "border-b border-l-0";
+      break;
+    case "stats":
+      evolutionBorder = "border-l border-b rounded-bl";
+      break;
+    case "evolution":
+      evolutionBorder = "border-0 rounded-none";
+      break;
+    default:
+      evolutionBorder = "border-0 rounded-none";
+      break;
+  }
+
   const id = "#" + String(data?.id).padStart(3, "0");
 
   return (
-    <div className="absolute left-0 top-0 z-20 flex h-full max-w-[455px] sm:relative sm:z-0">
+    <div className="absolute left-0 top-0 z-20 flex h-full w-full sm:relative sm:z-0 sm:max-w-[455px]">
       <div
-        className="flex h-full flex-col p-4 font-pokemon-classic sm:h-full sm:p-4  md:rounded md:border-2 md:border-black"
+        className="flex h-full w-full flex-col p-4 font-pokemon-classic sm:h-full sm:p-4  md:rounded md:border-2 md:border-black"
         style={{ backgroundColor: `var(--color-${data?.types[0].type.name})` }}
       >
         <div
@@ -44,17 +92,26 @@ const Page = ({ params }: { readonly params: { pokemonName: string } }) => {
             <Button className="p-2"> Back </Button>
           </Link>
         </div>
-        {/* <div className="flex h-1/2 justify-center">
-          <div
-            className="flex h-full w-full flex-wrap  justify-center bg-cover bg-no-repeat text-3xl "
-            style={{ backgroundImage: `url(${data?.sprites.front_default}` }}
-          />
-        </div>*/}
         <div className="flex flex-1 flex-col rounded border-2 border-black bg-white text-lg">
-          <ul className="flex flex-row flex-wrap justify-around p-1">
-            <li onClick={() => setMenu("about")}>About</li>
-            <li onClick={() => setMenu("stats")}>Stats </li>
-            <li onClick={() => setMenu("evolution")}>Evolution</li>
+          <ul className="flex flex-row flex-wrap justify-around">
+            <li
+              className={`flex w-1/3 justify-center ${aboutBorder} cursor-pointer`}
+              onClick={() => setMenu("about")}
+            >
+              About
+            </li>
+            <li
+              className={`flex w-1/3 justify-center ${statsBorder} cursor-pointer`}
+              onClick={() => setMenu("stats")}
+            >
+              Stats{" "}
+            </li>
+            <li
+              className={`flex w-1/3 justify-center ${evolutionBorder} cursor-pointer`}
+              onClick={() => setMenu("evolution")}
+            >
+              Evolution
+            </li>
           </ul>
 
           {menu === "about" && (
