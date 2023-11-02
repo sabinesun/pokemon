@@ -1,5 +1,5 @@
 import { type PokemonData } from "@/components/pokemon-list";
-import { Badge } from "@/components/ui/badge";
+import { PokemonTypeBadge } from "@/components/pokemon-type-badge";
 import { fetcher } from "@/lib/fetcher";
 import * as React from "react";
 import { PiGenderFemale, PiGenderMale } from "react-icons/pi";
@@ -49,11 +49,7 @@ export const PokemonAbout = ({
           <div className="w-1/3">Type </div>
           <div className="flex flex-1 gap-1">
             {types?.map((value) => (
-              // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-              // @ts-expect-error
-              <Badge key={value.type.name} variant={value.type.name}>
-                {value.type.name}
-              </Badge>
+              <PokemonTypeBadge key={value.type.name} type={value.type.name} />
             ))}
           </div>
         </div>
