@@ -1,6 +1,7 @@
 "use client";
 
 import { type PokemonType } from "@/app/pokedex/page";
+import { ClientOnly } from "@/components/client-only";
 import { FilterType } from "@/components/filter-type";
 import { PokemonList } from "@/components/pokemon-list";
 import { Input } from "@/components/ui/input";
@@ -25,7 +26,9 @@ export const PokemonSide = () => {
         />
       </div>
       <div className="flex h-5/6 w-full gap-5">
-        <PokemonList inputValue={inputValue} selectedType={selectedType} />
+        <ClientOnly>
+          <PokemonList inputValue={inputValue} selectedType={selectedType} />
+        </ClientOnly>
       </div>
     </div>
   );
