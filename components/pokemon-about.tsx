@@ -15,6 +15,11 @@ export type PokemonAboutProps = {
   readonly types: PokemonType[];
   readonly weight: number;
 };
+
+export type PokemonFlavorText = {
+  readonly flavor_text: string;
+  readonly language: PokemonData;
+};
 export const PokemonAbout = ({
   species,
   height,
@@ -32,13 +37,20 @@ export const PokemonAbout = ({
   return (
     <div className="flex max-h-56 flex-1 flex-col justify-between p-4 ">
       <div className="leading-5">
-        {data.flavor_text_entries[0].flavor_text}{" "}
+        {
+          data?.flavor_text_entries.find(
+            (flavorText: PokemonFlavorText) =>
+              flavorText.language.name === "en",
+          ).flavor_text
+        }
       </div>
       <div>
         <div className="flex items-center ">
           <div className="w-1/3">Type </div>
           <div className="flex flex-1 gap-1">
-            {types.map((value) => (
+            {types?.map((value) => (
+              // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+              // @ts-expect-error
               <Badge key={value.type.name} variant={value.type.name}>
                 {value.type.name}
               </Badge>

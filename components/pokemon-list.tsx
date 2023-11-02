@@ -30,7 +30,7 @@ export const PokemonList = ({
   });
   const numberWidthPokemon = Math.trunc(dimensions.width / 96);
   const numberHeightPokemon = Math.trunc(
-    (dimensions.height * (5 / 6) - 30) / 96,
+    (dimensions.height * (5 / 6) - 48 * 2) / 96,
   );
 
   const [totalPokemonByPage, setTotalPokemonByPage] = useState(
@@ -95,13 +95,13 @@ export const PokemonList = ({
 
     if (isTypeSelected) {
       listDisplayedPokemon = isSearchingPokemon
-        ? (listDisplayedPokemon = data.pokemon)
+        ? (listDisplayedPokemon = data?.pokemon)
         : data?.pokemon?.filter((pokemonByType: PokemonDataByType) =>
             pokemonByType.pokemon.name.includes(inputValue.trim()),
           );
     } else {
       listDisplayedPokemon = isSearchingPokemon
-        ? (listDisplayedPokemon = data.results)
+        ? (listDisplayedPokemon = data?.results)
         : data?.results?.filter((pokemon: PokemonData) =>
             pokemon.name.includes(inputValue.trim()),
           );

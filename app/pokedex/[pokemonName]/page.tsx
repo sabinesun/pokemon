@@ -17,32 +17,39 @@ const Page = ({ params }: { readonly params: { pokemonName: string } }) => {
   );
 
   if (isLoading) {
-    return <div>loading</div>;
+    return (
+      <div className="absolute left-0 top-0 flex h-full sm:relative">
+        loading
+      </div>
+    );
   }
 
   const id = "#" + String(data?.id).padStart(3, "0");
 
   return (
-    <div className="flex h-full ">
+    <div className="absolute left-0 top-0 z-20 flex h-full max-w-[455px] sm:relative sm:z-0">
       <div
         className="flex h-full flex-col p-4 font-pokemon-classic sm:h-full sm:p-4  md:rounded md:border-2 md:border-black"
-        style={{ backgroundColor: `var(--color-${data.types[0].type.name})` }}
+        style={{ backgroundColor: `var(--color-${data?.types[0].type.name})` }}
       >
-        <div className="flex flex-wrap items-center justify-between p-2 md:p-4">
+        <div
+          className="flex h-1/2 flex-row  flex-wrap content-start items-center justify-between bg-cover bg-no-repeat p-2 md:p-4"
+          style={{ backgroundImage: `url(${data?.sprites.front_default}` }}
+        >
           <div className=" flex items-baseline gap-2">
-            <h1 className="text-4xl">{data.name}</h1>
+            <h1 className="text-4xl">{data?.name}</h1>
             <h2 className="text-2xl">{id}</h2>
           </div>
           <Link className="md:hidden" href="/pokedex">
             <Button className="p-2"> Back </Button>
           </Link>
         </div>
-        <div className="flex h-1/2 justify-center">
+        {/* <div className="flex h-1/2 justify-center">
           <div
             className="flex h-full w-full flex-wrap  justify-center bg-cover bg-no-repeat text-3xl "
             style={{ backgroundImage: `url(${data?.sprites.front_default}` }}
           />
-        </div>
+        </div>*/}
         <div className="flex flex-1 flex-col rounded border-2 border-black bg-white text-lg">
           <ul className="flex flex-row flex-wrap justify-around p-1">
             <li onClick={() => setMenu("about")}>About</li>
@@ -52,10 +59,10 @@ const Page = ({ params }: { readonly params: { pokemonName: string } }) => {
 
           {menu === "about" && (
             <PokemonAbout
-              height={data.height}
-              species={data.species.url}
-              types={data.types}
-              weight={data.weight}
+              height={data?.height}
+              species={data?.species.url}
+              types={data?.types}
+              weight={data?.weight}
             />
           )}
           {menu === "stats" && <div>test</div>}
