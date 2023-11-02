@@ -1,3 +1,4 @@
-export const fetcher = (url: string) =>
-  // eslint-disable-next-line promise/prefer-await-to-then
-  fetch(url).then((result) => result.json());
+export const fetcher = async (url: string) => {
+  const response = await fetch(url);
+  return response.json();
+};
