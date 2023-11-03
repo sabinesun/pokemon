@@ -2,6 +2,7 @@
 "use client";
 
 import { PokemonAbout } from "@/components/pokemon-about";
+import { PokemoneStats } from "@/components/pokemone-stats";
 import { Button } from "@/components/ui/button";
 import { fetcher } from "@/lib/fetcher";
 import Link from "next/link";
@@ -122,7 +123,7 @@ const Page = ({ params }: { readonly params: { pokemonName: string } }) => {
               weight={data?.weight}
             />
           )}
-          {menu === "stats" && <div>test</div>}
+          {menu === "stats" && <PokemoneStats stats={data?.stats} />}
         </div>
       </div>
     </div>
