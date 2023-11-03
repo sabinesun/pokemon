@@ -9,7 +9,7 @@ type PokemonStat = {
 type PokemonStatsProps = {
   readonly stats: PokemonStat[];
 };
-export const PokemoneStats = ({ stats }: PokemonStatsProps) => {
+export const PokemonStats = ({ stats }: PokemonStatsProps) => {
   const hp = stats.find((stat) => stat.stat.name === "hp")?.base_stat;
   const hpPercentage = hp && (hp * 100) / 250;
 
