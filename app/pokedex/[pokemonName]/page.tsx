@@ -17,6 +17,11 @@ const Page = ({ params }: { readonly params: { pokemonName: string } }) => {
     `https://pokeapi.co/api/v2/pokemon/${params.pokemonName}`,
     fetcher,
   );
+  const { data: speciesData } = useSWR(data?.species.url, fetcher);
+  const { data: evolutionData } = useSWR(
+    speciesData?.evolution_chain.url,
+    fetcher,
+  );
 
   if (isLoading) {
     return (
@@ -94,7 +99,7 @@ const Page = ({ params }: { readonly params: { pokemonName: string } }) => {
             <Button className="p-2"> Back </Button>
           </Link>
         </div>
-        <div className="flex flex-1 flex-col rounded border-2 border-black bg-white text-lg">
+        <div className="flex h-[350px] flex-col rounded border-2 border-black bg-white text-lg">
           <ul className="flex flex-row flex-wrap justify-around">
             <li
               className={`flex w-1/3 justify-center ${aboutBorder} cursor-pointer`}
@@ -125,6 +130,12 @@ const Page = ({ params }: { readonly params: { pokemonName: string } }) => {
             />
           )}
           {menu === "stats" && <PokemonStats stats={data?.stats} />}
+          {menu === "evolution" && (
+            <PokemonEvolution
+              chainLink={evolutionData.chain}
+              selectedPokemon={params.pokemonName}
+            />
+          )}
         </div>
       </div>
     </div>
