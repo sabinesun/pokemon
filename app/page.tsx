@@ -44,7 +44,7 @@ const Home = () => {
                   onMouseEnter={() => handleMouseEnter(true)}
                   onMouseLeave={() => handleMouseLeave(true)}
                   priority
-                  src="/images/pokemart-Exterior.png"
+                  src="/images/pokemart-exterior.png"
                   width={150}
                 />
               </Link>
@@ -75,19 +75,21 @@ const Home = () => {
                 onMouseEnter={() => handleMouseEnter(true)}
                 onMouseLeave={() => handleMouseLeave(true)}
               >
-                <div
-                  className={`mx-1 pb-px group-hover:opacity-100 ${
-                    isHoveringMarket ? "opacity-100" : "opacity-0"
-                  }`}
-                >
-                  <Image
-                    alt="Pokemart"
-                    height={12}
-                    src="/images/arrow.png"
-                    width={12}
-                  />
-                </div>
-                Check the Pokedex{" "}
+                <Link href="/pokedex">
+                  <div
+                    className={`mx-1 pb-px group-hover:opacity-100 ${
+                      isHoveringMarket ? "opacity-100" : "opacity-0"
+                    }`}
+                  >
+                    <Image
+                      alt="Pokemart"
+                      height={12}
+                      src="/images/arrow.png"
+                      width={12}
+                    />
+                  </div>
+                  Check the Pokedex
+                </Link>
               </li>
               <li
                 className="group flex flex-wrap items-baseline text-2xl "
