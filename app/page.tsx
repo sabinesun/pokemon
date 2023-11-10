@@ -75,7 +75,7 @@ const Home = () => {
                 onMouseEnter={() => handleMouseEnter(true)}
                 onMouseLeave={() => handleMouseLeave(true)}
               >
-                <Link href="/pokedex">
+                <Link className="flex flex-row items-baseline" href="/pokedex">
                   <div
                     className={`mx-1 pb-px group-hover:opacity-100 ${
                       isHoveringMarket ? "opacity-100" : "opacity-0"
