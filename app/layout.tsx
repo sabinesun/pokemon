@@ -1,5 +1,6 @@
 // eslint-disable-next-line canonical/filename-match-exported,import/no-unassigned-import
 import "./globals.css";
+import { Analytics } from "@vercel/analytics/react";
 import { type Metadata } from "next";
 import { Inter } from "next/font/google";
 
@@ -16,7 +17,9 @@ export const metadata: Metadata = {
 const RootLayout = ({ children }: { readonly children: React.ReactNode }) => {
   return (
     <html lang="en">
-      <body className={`overflow-hidden ${inter.className}`}>{children}</body>
+      <body className={`overflow-hidden ${inter.className}`}>
+        {children} <Analytics />
+      </body>
     </html>
   );
 };
