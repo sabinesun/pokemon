@@ -67,7 +67,9 @@ export const PokemonAbout = ({
         </div>
         <div className="flex items-center ">
           <div className="w-1/3">Gender</div>
-          {data?.gender_rate !== -1 ? (
+          {data?.gender_rate === -1 ? (
+            <div>unknown</div>
+          ) : (
             <div className="flex flex-1 gap-3">
               <div className="flex items-center ">
                 <PiGenderFemale className="text-[#D8308A]" />
@@ -77,8 +79,6 @@ export const PokemonAbout = ({
                 <PiGenderMale className="text-[#54A9DD]" /> {100 - femaleRate} %
               </div>
             </div>
-          ) : (
-            <div>unknown</div>
           )}
         </div>
       </div>

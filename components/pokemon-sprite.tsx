@@ -5,14 +5,10 @@ import { usePathname } from "next/navigation";
 import useSWR from "swr";
 
 export type PokemonSpriteProps = {
-  readonly setSelectedPokemon: React.Dispatch<React.SetStateAction<string>>;
   readonly url: string;
 };
 
-export const PokemonSprite = ({
-  url,
-  setSelectedPokemon,
-}: PokemonSpriteProps) => {
+export const PokemonSprite = ({ url }: PokemonSpriteProps) => {
   const { data, error } = useSWR(`${url}`, fetcher);
 
   const pathname = usePathname();
@@ -24,13 +20,8 @@ export const PokemonSprite = ({
     return <div>Error</div>;
   }
 
-  setSelectedPokemon(pathname.split("/")[pathname.split("/").length - 1]);
-
   return (
-    <div
-      className="group h-[96px]"
-      onClick={() => setSelectedPokemon(data?.name)}
-    >
+    <div className="group h-[96px]">
       {currentPokemon && (
         <Image
           alt="cursor"
