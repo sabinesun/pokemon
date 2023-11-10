@@ -1,12 +1,14 @@
 // eslint-disable-next-line canonical/filename-match-exported
 "use client";
 
+import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 
 const Home = () => {
   const [isHoveringMarket, setIsHoveringMarket] = useState(false);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [isHoveringPC, setIsHoveringPC] = useState(false);
 
   const handleMouseEnter = (market: boolean) => {
@@ -31,32 +33,38 @@ const Home = () => {
         <div className="space-y-8">
           <div className="flex justify-center text-8xl">WELCOME</div>
           <div className="flex flex-row gap-10">
-            <Link href="/pokedex">
-              <Image
-                alt="Pokemart"
-                className={`hover:scale-110 ${
-                  isHoveringMarket ? "scale-110" : "scale-100"
-                }`}
-                height={150}
-                onMouseEnter={() => handleMouseEnter(true)}
-                onMouseLeave={() => handleMouseLeave(true)}
-                priority
-                src="/images/pokemart-Exterior.png"
-                width={150}
-              />
-            </Link>
-            <Image
-              alt="Pokemart"
-              className={`hover:scale-110 ${
-                isHoveringPC ? "scale-110" : "scale-100"
-              }`}
-              height={150}
-              onMouseEnter={() => handleMouseEnter(false)}
-              onMouseLeave={() => handleMouseLeave(false)}
-              priority
-              src="/images/pokemon-center-exterior.png"
-              width={150}
-            />
+            <Button className="flex h-auto items-center border-0 bg-transparent">
+              <Link href="/pokedex">
+                <Image
+                  alt="Pokemart"
+                  className={`hover:scale-110 ${
+                    isHoveringMarket ? "scale-110" : "scale-100"
+                  }`}
+                  height={150}
+                  onMouseEnter={() => handleMouseEnter(true)}
+                  onMouseLeave={() => handleMouseLeave(true)}
+                  priority
+                  src="/images/pokemart-Exterior.png"
+                  width={150}
+                />
+              </Link>
+            </Button>
+            <Button
+              className="flex h-auto items-center border-0 bg-transparent"
+              disabled
+            >
+              <Link href="/">
+                <Image
+                  alt="Pokemart"
+                  height={150}
+                  onMouseEnter={() => handleMouseEnter(false)}
+                  onMouseLeave={() => handleMouseLeave(false)}
+                  priority
+                  src="/images/pokemon-center-exterior.png"
+                  width={150}
+                />
+              </Link>
+            </Button>
           </div>
 
           <div className="flex justify-center rounded border-8 border-double border-black bg-white text-4xl	">
@@ -86,11 +94,7 @@ const Home = () => {
                 onMouseEnter={() => handleMouseEnter(false)}
                 onMouseLeave={() => handleMouseLeave(false)}
               >
-                <div
-                  className={`mx-1 pb-px group-hover:opacity-100 ${
-                    isHoveringPC ? "opacity-100" : "opacity-0"
-                  }`}
-                >
+                <div className="mx-1 pb-px opacity-0">
                   <Image
                     alt="Pokemart"
                     height={12}
@@ -98,7 +102,7 @@ const Home = () => {
                     width={12}
                   />
                 </div>
-                Guess all Pokemon{" "}
+                <span className="line-through">Guess all Pokemon</span>
               </li>
             </ul>
           </div>
